@@ -9,6 +9,7 @@ class Admin
 	
 	public function add()
     { 
+        //dump($_POST);die;
 	  return view();
     }
 	
