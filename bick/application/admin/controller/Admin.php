@@ -4,11 +4,13 @@ use think\Controller;
 use app\admin\model\Admin as AdminModel;
 class Admin extends Controller
 {
-    /* $admin = 1;
+
     public function _initialize()
     {
-        global $admin = new AdminModel();
-    }*/
+        if (!session('id') || !session('name')){
+            $this->error('您尚未登录系统',url('login/index'));
+        }
+    }
 
 
     public function lst()
@@ -28,6 +30,10 @@ class Admin extends Controller
             echo $value -> password;
             echo "<br>";
         }*/
+       if (!session('id') || !session('name')){
+           $this->error('您尚未登录系统',url('login/index'));
+       }
+
         $admin=new AdminModel();
         $adminRes=$admin->getAdmin();
         //dump($res);die;
@@ -96,5 +102,10 @@ class Admin extends Controller
         }else{
             $this->error('删除管理员失败！');
         }
+    }
+
+    public function logout(){
+        session(null);
+        $this->success('退出系统成功！',url('login/index'));
     }
 }

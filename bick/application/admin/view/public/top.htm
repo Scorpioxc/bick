@@ -5,8 +5,8 @@
             <div class="navbar-header pull-left">
                 <a href="#" class="navbar-brand">
                     <small>
-                            <img src="__ADMIN__/images/logo.png" alt="">
-                        </small>
+                        <img src="__ADMIN__/images/logo.png" alt="">
+                    </small>
                 </a>
             </div>
             <!-- /Navbar Barnd -->
@@ -25,21 +25,21 @@
                                     <img src="__ADMIN__/images/zhowinLogo.jpg">
                                 </div>
                                 <section>
-                                    <h2><span class="profile"><span>admin</span></span></h2>
+                                    <h2><span class="profile"><span>{$Request.session.name}</span></span></h2>
                                 </section>
                             </a>
                             <!--Login Area Dropdown-->
                             <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
                                 <li class="username"><a>David Stevenson</a></li>
                                 <li class="dropdown-footer">
-                                    <a href="/admin/user/logout.html">
-                                            退出登录
-                                        </a>
+                                    <a href="{:url('admin/logout')}">
+                                        退出登录
+                                    </a>
                                 </li>
                                 <li class="dropdown-footer">
-                                    <a href="/admin/user/changePwd.html">
-                                            修改密码
-                                        </a>
+                                    <a href="{:url('/admin/admin/edit',array('id'=>$Request.session.id))}">
+                                        修改密码
+                                    </a>
                                 </li>
                             </ul>
                             <!--/Login Area Dropdown-->
