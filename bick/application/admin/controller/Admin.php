@@ -29,9 +29,9 @@ class Admin extends Controller
             echo "<br>";
         }*/
         $admin=new AdminModel();
-        $res=$admin->getAdmin();
+        $adminRes=$admin->getAdmin();
         //dump($res);die;
-        $this->assign('res',$res);
+        $this->assign('adminRes',$adminRes);
         //dump($res);
 
 	    return view();
@@ -54,8 +54,47 @@ class Admin extends Controller
         return view();
     }
 	
-	public function edit()
-    { 
-	  return view();
+	public function edit($id)
+    {
+        $adminExist=db('admin')->field('id,name,password')->find($id);
+
+        //表单提交入口
+        if(request()->isPost()) {
+
+            $data = input('post.');
+            $admin = new AdminModel();
+            $res = $admin->saveAdmin($data,$adminExist);
+            //验证输入的用户名
+            if ($res == 2){
+                $this->error('管理员用户名不可为空！');
+            }
+
+
+            if ($res !== false){
+                $this->success('修改成功!',url('lst'));
+            }else{
+                $this->error('修改失败!');
+            }
+            return;
+        }
+
+        //页面跳转入口
+        if (!$adminExist){
+            $this->error('管理员不存在');
+        }
+        $this->assign('admin',$adminExist);
+        return view();
+    }
+
+    public function del($id)
+    {
+
+        $admin=new AdminModel();
+        $delnum=$admin->delAdmin($id);
+        if($delnum == '1'){
+            $this->success('删除管理员成功！',url('lst'));
+        }else{
+            $this->error('删除管理员失败！');
+        }
     }
 }
