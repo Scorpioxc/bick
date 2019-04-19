@@ -1,16 +1,8 @@
 <?php
 namespace app\admin\controller;
-use think\Controller;
 use app\admin\model\Admin as AdminModel;
-class Admin extends Controller
+class Admin extends Common
 {
-
-    public function _initialize()
-    {
-        if (!session('id') || !session('name')){
-            $this->error('您尚未登录系统',url('login/index'));
-        }
-    }
 
 
     public function lst()
@@ -30,9 +22,7 @@ class Admin extends Controller
             echo $value -> password;
             echo "<br>";
         }*/
-       if (!session('id') || !session('name')){
-           $this->error('您尚未登录系统',url('login/index'));
-       }
+
 
         $admin=new AdminModel();
         $adminRes=$admin->getAdmin();
